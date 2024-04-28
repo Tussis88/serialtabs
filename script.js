@@ -64,6 +64,11 @@ function tableGenerator(data) {
       secondHead.scope = "col";
       secondHead.textContent = data[0];
       newRow.appendChild(secondHead);
+
+      const thirdHead = document.createElement("th");
+      thirdHead.scope = "col";
+      thirdHead.textContent = "-";
+      newRow.appendChild(thirdHead);
     }
   } else if (data[1] === "seriale") {
     const currentTable = document.querySelector(`#${currentCode}`);
@@ -79,6 +84,15 @@ function tableGenerator(data) {
       const secondCell = document.createElement("td");
       secondCell.textContent = data[0];
       newRow.appendChild(secondCell);
+
+      const thirdCell = document.createElement("td");
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "x";
+      deleteButton.addEventListener("click", (e) => {
+        e.target.parentElement.parentElement.remove();
+      });
+      thirdCell.appendChild(deleteButton);
+      newRow.appendChild(thirdCell);
     }
   }
   
