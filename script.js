@@ -78,8 +78,8 @@ function tableGenerator(data) {
       currentTable.querySelector("tbody").appendChild(newRow);
       
       const firstCell = document.createElement("td");
-      firstCell.textContent = "-";
       newRow.appendChild(firstCell);
+      firstCell.textContent = firstCell.parentElement.parentElement.rows.length;
 
       const secondCell = document.createElement("td");
       secondCell.textContent = data[0];
