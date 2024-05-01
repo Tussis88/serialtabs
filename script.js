@@ -8,6 +8,8 @@ document.addEventListener("keydown", (e) => {
 
 // GLOBAL VARIABLES
 let currentCode;
+let currentTempCode;
+let savedCodes = [];
 
 // DOM
 // Input
@@ -16,6 +18,13 @@ inputDom.focus();
 inputDom.addEventListener("keydown", (e) => {
   if (e.key === "Enter" || e.key === "Tab") {
     let result = codeParser(e.target.value);
+    if (result[1] === "brevi") {
+      currentTempCode = result[0];
+      if (!savedCodes.some((code) => code.breviCode === result[0])) {
+        savedCodes.push(createSerialList(result[0]));
+        console.table(savedCodes)
+      } 
+    }
     tableGenerator(result);
     console.log(`valore: ${result[0]} || esito: ${result[1]}`);
     e.target.value = "";
@@ -24,6 +33,13 @@ inputDom.addEventListener("keydown", (e) => {
 });
 
 // FUNZIONI
+// crea l'oggetto che salva i seriali in relazione ai codici
+function createSerialList(breviCode) {
+  const obj = {};
+  obj.breviCode = breviCode;
+  obj.serials = [];
+  return obj;
+}
 // distingue tra codice Brevi e seriali
 function codeParser(input) {
   if (input.length > 3 && input[2] === "." && input.length < 8)
