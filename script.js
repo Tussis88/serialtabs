@@ -10,7 +10,6 @@ document.addEventListener("keydown", (e) => {
 let currentCode;
 let currentCodeAlt; // questo è quello nuovo. Dovrà sostituire currentCode
 let savedCodes = {};
-let currentCodeIndex;
 
 // DOM
 // Input
@@ -26,7 +25,6 @@ inputDom.addEventListener("keydown", (e) => {
     inputDom.focus();
   }
 });
-
 // FUNZIONI
 
 // riempie la lista di oggetti
