@@ -8,7 +8,8 @@ document.addEventListener("keydown", (e) => {
 
 // GLOBAL VARIABLES
 let currentCode;
-let savedCodes = [];
+let currentCodeAlt; // questo è quello nuovo. Dovrà sostituire currentCode
+let savedCodes = {};
 let currentCodeIndex;
 
 // DOM
@@ -27,25 +28,16 @@ inputDom.addEventListener("keydown", (e) => {
 });
 
 // FUNZIONI
-// crea l'oggetto che salva i seriali di un dato codice
-function createSerialList(breviCode) {
-  const obj = {};
-  obj.breviCode = breviCode;
-  obj.serials = [];
-  return obj;
-}
 
 // riempie la lista di oggetti
 function fillSavedCodes(data) {
   if (data[1] === "brevi") {
-    if (!savedCodes.some((code) => code.breviCode === data[0])) {
-      savedCodes.push(createSerialList(data[0]));
+    currentCodeAlt = data[0];
+    if (!savedCodes[currentCodeAlt]) {
+      savedCodes[currentCodeAlt] = [];
     }
-    currentCodeIndex = savedCodes.findIndex(
-      (code) => code.breviCode === data[0],
-    );
   } else if (data[1] === "seriale") {
-    savedCodes[currentCodeIndex].serials.push(data[0]);
+    savedCodes[currentCodeAlt].push(data[0]);
   }
   console.table(savedCodes);
 }
