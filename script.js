@@ -8,8 +8,8 @@ document.addEventListener("keydown", (e) => {
 
 // GLOBAL VARIABLES
 let currentCode;
-let currentTempCode;
 let savedCodes = [];
+let currentCodeIndex;
 
 // DOM
 // Input
@@ -18,13 +18,7 @@ inputDom.focus();
 inputDom.addEventListener("keydown", (e) => {
   if (e.key === "Enter" || e.key === "Tab") {
     let result = codeParser(e.target.value);
-    if (result[1] === "brevi") {
-      currentTempCode = result[0];
-      if (!savedCodes.some((code) => code.breviCode === result[0])) {
-        savedCodes.push(createSerialList(result[0]));
-        console.table(savedCodes)
-      } 
-    }
+    fillSavedCodes(result);
     tableGenerator(result);
     console.log(`valore: ${result[0]} || esito: ${result[1]}`);
     e.target.value = "";
@@ -33,13 +27,29 @@ inputDom.addEventListener("keydown", (e) => {
 });
 
 // FUNZIONI
-// crea l'oggetto che salva i seriali in relazione ai codici
+// crea l'oggetto che salva i seriali di un dato codice
 function createSerialList(breviCode) {
   const obj = {};
   obj.breviCode = breviCode;
   obj.serials = [];
   return obj;
 }
+
+// riempie la lista di oggetti
+function fillSavedCodes(data) {
+  if (data[1] === "brevi") {
+    if (!savedCodes.some((code) => code.breviCode === data[0])) {
+      savedCodes.push(createSerialList(data[0]));
+    }
+    currentCodeIndex = savedCodes.findIndex(
+      (code) => code.breviCode === data[0],
+    );
+  } else if (data[1] === "seriale") {
+    savedCodes[currentCodeIndex].serials.push(data[0]);
+  }
+  console.table(savedCodes);
+}
+
 // distingue tra codice Brevi e seriali
 function codeParser(input) {
   if (input.length > 3 && input[2] === "." && input.length < 8)
@@ -92,7 +102,7 @@ function tableGenerator(data) {
     if (currentTable) {
       const newRow = document.createElement("tr");
       currentTable.querySelector("tbody").appendChild(newRow);
-      
+
       const firstCell = document.createElement("td");
       newRow.appendChild(firstCell);
       firstCell.textContent = firstCell.parentElement.parentElement.rows.length;
@@ -111,5 +121,4 @@ function tableGenerator(data) {
       newRow.appendChild(thirdCell);
     }
   }
-  
 }
