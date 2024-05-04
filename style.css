@@ -1,0 +1,15 @@
+.currentCode {
+  color: greenyellow;
+}
+
+.duplicate {
+  background-color: violet;
+}
+
+.copied {
+  color: palevioletred;
+}
+
+.secondCell {
+  cursor: pointer;
+}

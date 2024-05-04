@@ -8,8 +8,8 @@ document.addEventListener("keydown", (e) => {
 
 // GLOBAL VARIABLES
 let currentCode;
-let currentCodeAlt; // questo è quello nuovo. Dovrà sostituire currentCode
 let savedCodes = {};
+let copiedSerials = [];
 
 // DOM
 // Input
@@ -20,27 +20,12 @@ inputDom.addEventListener("keydown", (e) => {
   if (e.key === "Enter" || e.key === "Tab") {
     let result = codeParser(e.target.value);
     fillSavedCodes(result);
-    tableGenerator(result);
-    // console.log(`valore: ${result[0]} || esito: ${result[1]}`);
+    tableGenerator();
     e.target.value = "";
-    inputDom.focus();
   }
 });
+
 // FUNZIONI
-
-// riempie la lista di oggetti
-function fillSavedCodes(data) {
-  if (data[1] === "brevi") {
-    currentCodeAlt = data[0];
-    if (!savedCodes[currentCodeAlt]) {
-      savedCodes[currentCodeAlt] = [];
-    }
-  } else if (data[1] === "seriale") {
-    savedCodes[currentCodeAlt].push(data[0]);
-  }
-  // console.table(savedCodes);
-}
-
 // distingue tra codice Brevi e seriali
 function codeParser(input) {
   if (input.length > 3 && input[2] === "." && input.length < 8)
@@ -49,77 +34,84 @@ function codeParser(input) {
   return [input, "invalid"];
 }
 
-// aggiunge i dati alla tabella corretta
-function tableGenerator(data) {
-  const tables = document.querySelectorAll("table");
-
-  for (let breviCode in savedCodes) {
-    console.log(`tabGen: ${breviCode}`);
-    for (i in savedCodes[breviCode]) {
-      console.log(`serTab: ${savedCodes[breviCode][i]}`);
+// riempie l'oggeto SavedCodes con l'input corretto
+function fillSavedCodes(data) {
+  if (data[1] === "brevi") {
+    currentCode = data[0];
+    if (!savedCodes[currentCode]) {
+      savedCodes[currentCode] = [];
     }
+  } else if (data[1] === "seriale") {
+    if (!savedCodes[currentCode]) {
+      alert("Prima inserisci un codice Brevi");
+      return
+    }
+    savedCodes[currentCode].push(data[0]);
   }
 }
-// function tableGenerator(data) {
-//   const tables = document.querySelectorAll("table");
-//   const tableContainer = document.querySelector("#tableContainer");
-//
-//   if (data[1] === "brevi") {
-//     // gli id non possono contenere punti  e css non supporta id che iniziano con numeri
-//     currentCode = "c" + data[0].replace(".", "dot");
-//     tablesArray = [...tables];
-//     tableId = tablesArray.filter((table) => table.id === currentCode);
-//     if (tableId.length > 0) {
-//       console.log(tableId);
-//     } else {
-//       const newTable = document.createElement("table");
-//       newTable.id = currentCode;
-//       tableContainer.appendChild(newTable);
-//       const newHead = document.createElement("thead");
-//       newTable.appendChild(newHead);
-//       const newBody = document.createElement("tbody");
-//       newTable.appendChild(newBody);
-//       const newRow = document.createElement("tr");
-//       newHead.appendChild(newRow);
-//
-//       const firstHead = document.createElement("th");
-//       firstHead.scope = "col";
-//       firstHead.textContent = "-";
-//       newRow.appendChild(firstHead);
-//
-//       const secondHead = document.createElement("th");
-//       secondHead.scope = "col";
-//       secondHead.textContent = data[0];
-//       newRow.appendChild(secondHead);
-//
-//       const thirdHead = document.createElement("th");
-//       thirdHead.scope = "col";
-//       thirdHead.textContent = "-";
-//       newRow.appendChild(thirdHead);
-//     }
-//   } else if (data[1] === "seriale") {
-//     const currentTable = document.querySelector(`#${currentCode}`);
-//     console.log(currentTable);
-//     if (currentTable) {
-//       const newRow = document.createElement("tr");
-//       currentTable.querySelector("tbody").appendChild(newRow);
-//
-//       const firstCell = document.createElement("td");
-//       newRow.appendChild(firstCell);
-//       firstCell.textContent = firstCell.parentElement.parentElement.rows.length;
-//
-//       const secondCell = document.createElement("td");
-//       secondCell.textContent = data[0];
-//       newRow.appendChild(secondCell);
-//
-//       const thirdCell = document.createElement("td");
-//       const deleteButton = document.createElement("button");
-//       deleteButton.textContent = "x";
-//       deleteButton.addEventListener("click", (e) => {
-//         e.target.parentElement.parentElement.remove();
-//       });
-//       thirdCell.appendChild(deleteButton);
-//       newRow.appendChild(thirdCell);
-//     }
-//   }
-// }
+
+// crea le tabelle in maniera dinamica
+function tableGenerator() {
+  const tables = document.querySelectorAll("table");
+  tables.forEach((table) => table.remove());
+
+  Object.entries(savedCodes).forEach(([breviCode, serialList]) => {
+    console.log(`tabGen: ${breviCode}`);
+    const newTable = document.createElement("table");
+    tableContainer.appendChild(newTable);
+
+    const newHead = document.createElement("tr");
+    if (breviCode === currentCode) newHead.classList.add("currentCode");
+    newTable.appendChild(newHead);
+
+    const firstHead = document.createElement("th");
+    firstHead.textContent = "-";
+    newHead.appendChild(firstHead);
+
+    const secondHead = document.createElement("th");
+    secondHead.textContent = breviCode;
+    newHead.appendChild(secondHead);
+
+    const thirdHead = document.createElement("th");
+    thirdHead.textContent = "-";
+    newHead.appendChild(thirdHead);
+
+    serialList.forEach((serialNumber, index) => {
+      const newRow = document.createElement("tr");
+      const duplicateSerial = serialList.filter(
+        (serial) => serial === serialNumber,
+      );
+      if (duplicateSerial.length > 1) newRow.classList.add("duplicate");
+      newTable.appendChild(newRow);
+
+      const firstCell = document.createElement("td");
+      firstCell.textContent = index + 1;
+      newRow.appendChild(firstCell);
+
+      const secondCell = document.createElement("td");
+      secondCell.textContent = serialNumber;
+      secondCell.classList.add("secondCell");
+      if (copiedSerials.includes(serialNumber)) {
+        secondCell.classList.add("copied");
+      }
+      secondCell.addEventListener("click", () => {
+        navigator.clipboard.writeText(serialNumber);
+        copiedSerials.push(serialNumber);
+        tableGenerator();
+      });
+      newRow.appendChild(secondCell);
+
+      const thirdCell = document.createElement("td");
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "x";
+      deleteButton.classList.add("delete");
+      deleteButton.addEventListener("click", () => {
+        serialList.splice(index, 1);
+        tableGenerator();
+      });
+      thirdCell.appendChild(deleteButton);
+      newRow.appendChild(thirdCell);
+    });
+  });
+  inputDom.focus();
+}
