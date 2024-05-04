@@ -44,7 +44,7 @@ function fillSavedCodes(data) {
   } else if (data[1] === "seriale") {
     if (!savedCodes[currentCode]) {
       alert("Prima inserisci un codice Brevi");
-      return
+      return;
     }
     savedCodes[currentCode].push(data[0]);
   }
@@ -78,6 +78,7 @@ function tableGenerator() {
 
     serialList.forEach((serialNumber, index) => {
       const newRow = document.createElement("tr");
+      // controllo seriali doppi
       const duplicateSerial = serialList.filter(
         (serial) => serial === serialNumber,
       );
