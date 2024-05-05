@@ -1,15 +1,105 @@
-.currentCode {
-  color: greenyellow;
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap");
+
+:root {
+  /* Tema basato su Rosé Pine */
+  /* https://rosepinetheme.com/palette/ingredients/ */
+  --background: #fffaf3;
+  --altbackground: #faf4ed;
+  --alttabs: #f4f0ee;
+  --arancione: #ea9d34;
+  --rosso: #d7827e;
+  --blu: #56949f;
+  --viola: #907aa9;
+  --grigio: #9893a5;
+  --nero: #575279;
 }
 
-.duplicate {
-  background-color: violet;
+body {
+  margin: 0px;
+  color: var(--nero);
+  font-family: "Inconsolata";
+}
+
+#inputContainer {
+  background-color: var(--altbackground);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+}
+
+input {
+  font-size: 20px;
+  line-height: 25px;
+  width: 350px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--grigio);
+  background-color: var(--alttabs);
+  color: inherit;
+  font-family: inherit;
+  font-weight: 500;
+  transition-duration: 0.3s;
+
+  &:focus {
+    outline: none;
+    background-color: var(--background);
+    border-color: var(--blu);
+  }
+}
+
+label {
+  margin: 3px;
+  color: var(--grigio);
+}
+
+#tableContainer {
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+table {
+  align-self: flex-start;
+  margin: 20px;
+  break-inside: avoid;
+  border-style: solid;
+  border-color: var(--grigio);
+  border-width: 0px;
+  border-top-width: 1px;
+  border-collapse: collapse;
+  width: 300px;
+  font-size: 18px;
+}
+
+th,
+td {
+  line-height: 30px;
+  padding: 0px 5px;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: var(--alttabs);
+}
+
+/* Regole specili per funzioni js  */
+.currentCode {
+  color: var(--blu);
+}
+
+tr.duplicate {
+  background-color: var(--rosso);
+  color: var(--background);
 }
 
 .copied {
-  color: palevioletred;
+  color: var(--viola);
+  font-weight: 600;
 }
 
 .secondCell {
   cursor: pointer;
+  width: 90%;
 }
