@@ -6,12 +6,15 @@
   --background: #fffaf3;
   --altbackground: #faf4ed;
   --alttabs: #f4f0ee;
-  --arancione: #ea9d34;
+  --arancione: #f6c177;
   --rosso: #d7827e;
   --blu: #56949f;
+  --celeste: #9ccfd8;
   --viola: #907aa9;
   --grigio: #9893a5;
   --nero: #575279;
+
+  --shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 body {
@@ -27,30 +30,32 @@ body {
   align-items: center;
   justify-content: center;
   height: 300px;
+  box-shadow: var(--shadow);
 }
 
 input {
-  font-size: 20px;
-  line-height: 25px;
-  width: 350px;
+  font-size: 21px;
+  line-height: 30px;
+  width: 400px;
   padding: 8px 16px;
-  border-radius: 20px;
+  border-radius: 25px;
   border: 1px solid var(--grigio);
   background-color: var(--alttabs);
   color: inherit;
   font-family: inherit;
   font-weight: 500;
-  transition-duration: 0.3s;
+  transition-duration: 0.4s;
 
   &:focus {
     outline: none;
     background-color: var(--background);
-    border-color: var(--blu);
+    border: 2px solid var(--celeste);
+    box-shadow: var(--shadow);
   }
 }
 
 label {
-  margin: 3px;
+  margin: 5px;
   color: var(--grigio);
 }
 
@@ -86,7 +91,7 @@ tr:nth-child(even) {
 
 /* Regole specili per funzioni js  */
 .currentCode {
-  color: var(--blu);
+  color: var(--celeste);
 }
 
 tr.duplicate {
@@ -102,4 +107,5 @@ tr.duplicate {
 .secondCell {
   cursor: pointer;
   width: 90%;
+  text-align: left;
 }
