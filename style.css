@@ -4,9 +4,10 @@
 :root {
   /* Tema basato su Rosé Pine */
   /* https://rosepinetheme.com/palette/ingredients/ */
-  --background: #fffaf3;
+  --background: #fffbf5;
   --altbackground: #faf4ed;
-  --alttabs: #f4f0ee;
+  --overlay: #f4f0ee;
+  --alttabs: #faf6f2;
   --arancione: #f6c177;
   --rosso: #d7827e;
   --blu: #56949f;
@@ -21,7 +22,7 @@
 body {
   margin: 0px;
   color: var(--nero);
-  font-family: "Inconsolata";
+  font-family: "Inconsolata", "Curier New", monospace;
   background-color: var(--background);
 }
 
@@ -51,7 +52,7 @@ input {
   &:focus {
     outline: none;
     background-color: var(--background);
-    border: 2px solid var(--celeste);
+    border: 1px solid var(--celeste);
     box-shadow: var(--shadow);
   }
 }
@@ -71,25 +72,32 @@ table {
   align-self: flex-start;
   margin: 20px;
   break-inside: avoid;
-  border-style: solid;
-  border-color: var(--grigio);
-  border-width: 0px;
-  border-top-width: 1px;
+  border: none;
   border-collapse: collapse;
   width: 300px;
   font-size: 18px;
+  line-height: 30px;
 }
 
 th,
 td {
-  line-height: 30px;
   padding: 0 0 0 10px;
   text-align: center;
   border-top: 0px;
 }
 
-tr:nth-child(even) {
+th {
+  font-size: 1.3rem;
+  border-bottom: 1px solid var(--grigio);
+  background-color: var(--background);
+}
+
+tr:nth-child(odd) {
   background-color: var(--alttabs);
+}
+
+tr:hover {
+  background-color: var(--overlay);
 }
 
 button {
@@ -97,8 +105,8 @@ button {
   background: transparent;
   border-style: none;
   border-radius: 2px;
-  transition-duration: 0.4s;
   padding: 10px 12px;
+  transition-duration: 0.5s;
 }
 
 button:hover {
