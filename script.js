@@ -56,8 +56,8 @@ function tableGenerator() {
   tables.forEach((table) => table.remove());
 
   Object.entries(savedCodes).forEach(([breviCode, serialList]) => {
-    console.log(`tabGen: ${breviCode}`);
     const newTable = document.createElement("table");
+    if (breviCode === currentCode) newTable.classList.add("currentTable");
     tableContainer.appendChild(newTable);
 
     const newHead = document.createElement("tr");
@@ -70,6 +70,10 @@ function tableGenerator() {
 
     const secondHead = document.createElement("th");
     secondHead.textContent = breviCode;
+    secondHead.addEventListener("click", () => {
+      currentCode = breviCode;
+      tableGenerator();
+    });
     newHead.appendChild(secondHead);
 
     const thirdHead = document.createElement("th");

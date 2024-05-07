@@ -8,6 +8,7 @@
   --altbackground: #faf4ed;
   --overlay: #f4f0ee;
   --alttabs: #faf6f2;
+  --verde: #85b66a;
   --arancione: #f6c177;
   --rosso: #d7827e;
   --blu: #56949f;
@@ -89,7 +90,16 @@ td {
 th {
   font-size: 1.3rem;
   border-bottom: 1px solid var(--grigio);
+  cursor: pointer;
+}
+
+table tr:first-child {
   background-color: var(--background);
+}
+
+table tr:first-child:hover {
+  background-color: var(--celeste);
+  color: var(--background);
 }
 
 tr:nth-child(odd) {
@@ -115,8 +125,9 @@ button:hover {
 }
 
 /* Regole specili per funzioni js  */
-.currentCode {
-  color: var(--celeste);
+tr:first-child.currentCode {
+  color: var(--background);
+  background-color: var(--celeste);
 }
 
 tr.duplicate {
