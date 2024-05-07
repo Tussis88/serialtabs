@@ -104,7 +104,7 @@ function tableGenerator() {
 
       const thirdCell = document.createElement("td");
       const deleteButton = document.createElement("button");
-      deleteButton.textContent = "x";
+      deleteButton.innerHTML = "<i class='nf nf-fa-trash_can'></i>";
       deleteButton.classList.add("delete");
       deleteButton.addEventListener("click", () => {
         serialList.splice(index, 1);
