@@ -18,4 +18,4 @@ Per rendere attiva un'altra tabella o crearne una nuova, è sufficiente inserire
 Per resetare i dati inseriti è sufficiente aggiornare la pagine.
 
 
-![Screenshot dell'app](screens/Screen.png)"Alcune tabelle create con l'app"
+![Screenshot dell'app](screens/Screen.png"Alcune tabelle create con l'app")
