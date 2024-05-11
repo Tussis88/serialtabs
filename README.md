@@ -11,7 +11,11 @@ Per rendere attiva un'altra tabella o crearne una nuova, è sufficiente inserire
 ## Funzionalità
 - Il programma funziona con diversi settaggi del lettore di codice a barre, non è quindi necessario modificarne le impostazioni.
 - La barra di input sarà sempre in _focus_ permettendo all'utente di utilizzare l'app senza dover stare davanti al computer.
-- Cliccando su un seriale questo verrà autmaticamente copiato nella _clipboard_ del computer potendolo così comodamente incollare dove serve.
+- i seriali sono renderizzati con un font _monospace_. Questo facilità l'identificazione di seriali _errati_ all'interno della tabella. 
+- Cliccando su un seriale questo verrà autmaticamente copiato nella _clipboard_ del computer potendolo così comodamente incollare dove serve. I seriali copiati in questo modo cambieranno colore.
 - Il programma segnalerà se un seriale è già stato inserito.
 
 Per resetare i dati inseriti è sufficiente aggiornare la pagine.
+
+
+![Screenshot dell'app](screen/Screen.png)"Alcune tabelle create con l'pp"
