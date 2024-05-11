@@ -28,10 +28,9 @@ inputDom.addEventListener("keydown", (e) => {
 // FUNZIONI
 // distingue tra codice Brevi e seriali
 function codeParser(input) {
-  if (input.length > 3 && input[2] === "." && input.length < 8)
-    return [input, "brevi"];
-  if (input.length > 6) return [input, "seriale"];
-  return [input, "invalid"];
+  const re = /^(?=.{1,7}$)[0-9]{2}\.[0-9]{1,4}[A-Za-z]?$/;
+  if (re.test(input)) return [input, "brevi"];
+  return [input, "seriale"]
 }
 
 // riempie l'oggeto SavedCodes con l'input corretto
