@@ -4,6 +4,11 @@ document.addEventListener("keydown", (e) => {
     e.preventDefault();
     e.stopPropagation();
   }
+  if (e.ctrlKey && e.key === "d") { // ctrl + d
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("ctrl+d");
+  }
 });
 
 // GLOBAL VARIABLES
@@ -14,7 +19,6 @@ let copiedSerials = [];
 // DOM
 // Input
 const inputDom = document.querySelector("#inputString");
-const tableContainer = document.querySelector("#tableContainer");
 inputDom.focus();
 inputDom.addEventListener("keydown", (e) => {
   if (e.key === "Enter" || e.key === "Tab") {
@@ -24,13 +28,15 @@ inputDom.addEventListener("keydown", (e) => {
     e.target.value = "";
   }
 });
+// Contenitore tabelle
+const tableContainer = document.querySelector("#tableContainer");
 
 // FUNZIONI
 // distingue tra codice Brevi e seriali
 function codeParser(input) {
-  const re = /^(?=.{4,7}$)[0-9]{2}\.[0-9]{1,4}[A-Za-z]?$/;
+  const re = /^[0-9]{2}\.[0-9]{1,4}[A-Z]?$/;
   if (re.test(input)) return [input, "brevi"];
-  return [input, "seriale"]
+  return [input, "seriale"];
 }
 
 // riempie l'oggeto SavedCodes con l'input corretto

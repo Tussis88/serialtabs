@@ -6,16 +6,16 @@ Questa è una piccola webapp in grado di creare tabelle in maniera dinamica dist
 ## Utilizzo
 
 Questa webapp è utilizzabile anche con i lettori di codice a barre.
-Inserendo un codice interno nel campo di input("sparandolo" con il lettore o digitandolo manualmente e poi premendo invio), il programma andrà a creare automaticamente una tabella e renderà quel codice _attivo_.
+Inserendo un codice interno nel campo di input (ossia "sparandolo" con il lettore oppure digitandolo manualmente e poi premendo invio), il programma andrà a creare automaticamente una tabella e renderà quel codice _attivo_.
 I seriali che verranno inseriti di seguito andranno a riempire la tabella del codice attivo.
 
-Per rendere attiva un'altra tabella o crearne una nuova, è sufficiente inserire il codice interno nella casella di input.
+Per rendere attiva un'altra tabella o crearne una nuova, è sufficiente inserire il codice interno desiderato nella casella di input.
 
 ## Funzionalità
 
 - La casella di input sarà sempre in _focus_ permettendo all'utente di utilizzare l'app senza dover stare davanti al computer.
 - Il programma funziona con diversi settaggi del lettore di codice a barre - non è quindi necessario modificarne le impostazioni.
-- I seriali sono renderizzati con un font _monospace_. Questo facilità l'identificazione di seriali _errati_ all'interno della tabella.
+- I seriali sono renderizzati con un font _monospace_. Questo facilita l'identificazione di seriali _errati_ all'interno della tabella.
 - Cliccando su un seriale, questo verrà automaticamente copiato nella _clipboard_ del computer, potendolo così comodamente incollare dove serve. I seriali copiati in questo modo cambieranno colore.
 - Il programma segnalerà se un seriale è già stato inserito.
 
