@@ -1,15 +1,15 @@
 // Disattiva la funzione di default del tasto tab
 document.addEventListener("keydown", (e) => {
-  console.log("tasto premuto")
+  // console.log("tasto premuto")
   if (e.key === "Tab") {
     e.preventDefault();
     e.stopPropagation();
   }
   if (e.ctrlKey && e.key === "d") {
-    console.log(`tasto premuto: ${e.key}, ctrlKey: ${e.ctrlKey}`)
+    // console.log(`tasto premuto: ${e.key}, ctrlKey: ${e.ctrlKey}`)
     e.preventDefault();
     e.stopPropagation();
-    console.log("propagazione di ctrl+d cancellata");
+    // console.log("propagazione di ctrl+d cancellata");
   }
 });
 
