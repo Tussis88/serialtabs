@@ -18,6 +18,7 @@ Per rendere attiva un'altra tabella o crearne una nuova, è sufficiente inserire
 - I seriali sono renderizzati con un font _monospace_. Questo facilita l'identificazione di seriali _errati_ all'interno della tabella.
 - Cliccando su un seriale, questo verrà automaticamente copiato nella _clipboard_ del computer, potendolo così comodamente incollare dove serve. I seriali copiati in questo modo cambieranno colore.
 - Il programma segnalerà se un seriale è già stato inserito.
+- Il programma dispone di un tema chiaro e un tema scuro. Questo verrà scelto automaticamene in base al tema di sistema.
 
 Per resettare i dati inseriti è sufficiente aggiornare la pagine.
 
