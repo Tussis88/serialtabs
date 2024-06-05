@@ -33,7 +33,7 @@ const tableContainer = document.querySelector("#tableContainer");
 // FUNZIONI
 // distingue tra codice Brevi e seriali
 function codeParser(input) {
-  const re = /^[0-9]{2}\.[0-9]{1,4}[A-Z]?$/;
+  const re = /^[0-9]{2}\.[0-9]{1,4}[A-Za-z]?$/;
   if (re.test(input)) return [input, "brevi"];
   return [input, "seriale"];
 }
